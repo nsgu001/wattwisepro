@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WattWise | Home Energy Efficiency & Electricity Savings</title>
+<meta name="description" content="Free calculators and guides to reduce your electric bill. Home energy audits, solar ROI, HVAC efficiency, LED savings, insulation payback, and time-of-use optimization.">
+<link rel="canonical" href="https://wattwisepro.org/">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<meta property="og:title" content="WattWise | Home Energy Efficiency & Electricity Savings">
+<meta property="og:description" content="Free calculators and guides to reduce your electric bill. Home energy audits, solar ROI, HVAC efficiency, and more.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wattwisepro.org/">
+<meta property="og:image" content="https://wattwisepro.org/images/og-default.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="WattWise | Home Energy Efficiency & Electricity Savings">
+<meta name="twitter:description" content="Free calculators and guides to reduce your electric bill.">
+<meta name="twitter:image" content="https://wattwisepro.org/images/og-default.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "WattWise",
+  "url": "https://wattwisepro.org/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://wattwisepro.org/blog/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://wattwisepro.org/"}
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="style.css">
+<style>
+/* Home-B Dashboard Layout Specifics */
+.watt-hero-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:32px; }
+.watt-stat-card { background:var(--watt-white); border-radius:var(--watt-radius); padding:20px; text-align:center; box-shadow:var(--watt-shadow); }
+.watt-stat-number { font-size:2rem; font-weight:800; color:var(--watt-primary); }
+.watt-stat-label { font-size:0.85rem; color:var(--watt-text-light); margin-top:4px; }
+.watt-hero { background:linear-gradient(135deg, var(--watt-primary-dark) 0%, var(--watt-primary) 100%); color:var(--watt-white); padding:64px 0 48px; }
+.watt-hero h1 { font-size:2.8rem; font-weight:800; margin-bottom:16px; max-width:700px; }
+.watt-hero p { font-size:1.2rem; opacity:0.9; max-width:600px; margin-bottom:24px; }
+.watt-feature-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:40px; }
+.watt-feature-card { background:var(--watt-white); border-radius:var(--watt-radius-lg); padding:28px; box-shadow:var(--watt-shadow); transition:transform 0.2s; }
+.watt-feature-card:hover { transform:translateY(-4px); box-shadow:var(--watt-shadow-hover); }
+.watt-feature-icon { width:48px; height:48px; background:var(--watt-primary-light); border-radius:var(--watt-radius); display:flex; align-items:center; justify-content:center; font-size:1.5rem; margin-bottom:16px; }
+.watt-feature-card h3 { font-size:1.15rem; font-weight:700; margin-bottom:8px; }
+.watt-feature-card p { color:var(--watt-text-light); font-size:0.9rem; margin:0; }
+.watt-cta-bar { background:var(--watt-accent); padding:32px 0; text-align:center; }
+.watt-cta-bar h2 { color:var(--watt-text); font-size:1.5rem; margin-bottom:12px; }
+@media (max-width:768px) {
+  .watt-hero-stats { grid-template-columns:repeat(2,1fr); }
+  .watt-feature-grid { grid-template-columns:1fr; }
+  .watt-hero h1 { font-size:1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="watt-nav">
+  <div class="watt-nav-container">
+    <a href="index.html" class="watt-nav-logo">Watt<span>Wise</span></a>
+    <button class="watt-nav-menu-btn" onclick="document.querySelector('.watt-nav-links').classList.toggle('active')" aria-label="Toggle menu">☰</button>
+    <ul class="watt-nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="tools/index.html">Tools</a></li>
+      <li><a href="blog/index.html">Blog</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Top Ad -->
+<div class="watt-container">
+  <div class="watt-ad-label">Advertisement</div>
+  <div id="hero_top" data-ad-slot="hero_top" class="watt-ad-slot"></div>
+</div>
+
+<!-- Hero Section -->
+<section class="watt-hero">
+  <div class="watt-container">
+    <h1>Stop Overpaying for Electricity You Do Not Use</h1>
+    <p>Free calculators, real data, and no-nonsense guides to cut your electric bill. Built by a 25-year utility veteran who has audited 1,200+ homes.</p>
+    <a href="tools/index.html" class="watt-btn watt-btn-accent" style="font-size:1.1rem;padding:14px 32px;">Explore Calculators</a>
+
+    <div class="watt-hero-stats">
+      <div class="watt-stat-card">
+        <div class="watt-stat-number">6</div>
+        <div class="watt-stat-label">Free Calculators</div>
+      </div>
+      <div class="watt-stat-card">
+        <div class="watt-stat-number">1,200+</div>
+        <div class="watt-stat-label">Homes Audited</div>
+      </div>
+      <div class="watt-stat-card">
+        <div class="watt-stat-number">25</div>
+        <div class="watt-stat-label">Years Experience</div>
+      </div>
+      <div class="watt-stat-card">
+        <div class="watt-stat-number">50</div>
+        <div class="watt-stat-label">States Covered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Middle Ad -->
+
+
+<!-- Tools Section -->
+<section class="watt-section">
+  <div class="watt-container">
+    <h2 class="watt-section-title">Energy Calculators</h2>
+    <p class="watt-section-subtitle">Every tool runs in your browser. No signup. No data leaves your device.</p>
+    <div class="watt-feature-grid">
+      <a href="tools/energy-bill-calculator.html" class="watt-feature-card">
+        <div class="watt-feature-icon">⚡</div>
+        <h3>Bill Breakdown</h3>
+        <p>See exactly where your electricity dollars go. HVAC, water heating, lighting, and more.</p>
+      </a>
+      <a href="tools/solar-roi-calculator.html" class="watt-feature-card">
+        <div class="watt-feature-icon">☀️</div>
+        <h3>Solar ROI</h3>
+        <p>25-year payback model with federal tax credits, state incentives, and net metering.</p>
+      </a>
+      <a href="tools/hvac-efficiency-analyzer.html" class="watt-feature-card">
+        <div class="watt-feature-icon">🌡️</div>
+        <h3>HVAC Analyzer</h3>
+        <p>Compare SEER ratings. Calculate upgrade cost, annual savings, and payback period.</p>
+      </a>
+      <a href="tools/led-savings-calculator.html" class="watt-feature-card">
+        <div class="watt-feature-icon">💡</div>
+        <h3>LED Savings</h3>
+        <p>Input your bulbs and usage. Get annual savings and CO2 reduction estimates.</p>
+      </a>
+      <a href="tools/insulation-roi-calculator.html" class="watt-feature-card">
+        <div class="watt-feature-icon">🏠</div>
+        <h3>Insulation ROI</h3>
+        <p>Attic, wall, and basement insulation payback by climate zone and material type.</p>
+      </a>
+      <a href="tools/time-of-use-optimizer.html" class="watt-feature-card">
+        <div class="watt-feature-icon">⏰</div>
+        <h3>TOU Optimizer</h3>
+        <p>Shift your usage to cheaper hours. Calculate battery storage economics.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Articles Section -->
+<section class="watt-section" style="background:var(--watt-white);">
+  <div class="watt-container">
+    <h2 class="watt-section-title">Latest from the Blog</h2>
+    <p class="watt-section-subtitle">Real stories, hard numbers, and utility-bill decoding from someone who spent 25 years inside the industry.</p>
+    <!-- Middle Ad -->
+<div class="watt-container">
+  <div class="watt-ad-label">Advertisement</div>
+  <div id="middle" data-ad-slot="middle" class="watt-ad-slot"></div>
+</div>
+
+<!-- INDEX_ARTICLES_START -->
+
+
+
+
+
+
+
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+      <a href="./blog/solar-panel-payback-real-numbers-2026.html" class="watt-article-card">
+        <img src="./images/blog/solar-panel-payback-real-numbers-2026.jpg" alt="Solar Panel Payback Real Numbers 2026" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Solar Panel Payback Real Numbers 2026</h3>
+          <p class="watt-card-excerpt">My solar panels paid for themselves in five years. Not the eight years the installer predicted. Not the ten years the skeptics warned about. Five. And...</p>
+          <div class="watt-card-meta">July 23, 2026</div>
+        </div>
+      </a>
+<a href="./blog/the-solar-panels-i-installed-and-the-battery-backup-i-wish-i-had-bought-first.html" class="watt-article-card">
+        <img src="./images/blog/the-solar-panels-i-installed-and-the-battery-backup-i-wish-i-had-bought-first.jpg" alt="The Solar Panels I Installed And The Battery Backup I Wish I Had Bought First" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Solar Panels I Installed And The Battery Backup I Wish I Had Bought First</h3>
+          <p class="watt-card-excerpt">The Solar Panels I Installed and the Battery Backup I Wish I Had Bought First I was standing in my driveway in Denver at 3:00 PM on a Tuesday in July,...</p>
+          <div class="watt-card-meta">July 13, 2026</div>
+        </div>
+      </a>
+<a href="./blog/austin-heat-watt-usage-explosion.html" class="watt-article-card">
+        <img src="./images/blog/austin-heat-watt-usage-explosion.jpg" alt="Austin Heat Watt Usage Explosion" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Austin Heat Watt Usage Explosion</h3>
+          <p class="watt-card-excerpt">Why My Watt Usage Tracker Said I Was "Efficient"—While My Bill Hit $340 Ryan Mitchell I was checking my smart home energy app on the first of August w...</p>
+          <div class="watt-card-meta">July 06, 2026</div>
+        </div>
+      </a>
+<a href="./blog/old-fridge-cost-200-year-replaced.html" class="watt-article-card">
+        <img src="./images/blog/old-fridge-cost-200-year-replaced.jpg" alt="Old Fridge Cost 200 Year Replaced" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Old Fridge Cost 200 Year Replaced</h3>
+          <p class="watt-card-excerpt">My refrigerator was older than some of my coworkers. It was a 1998 Whirlpool, avocado green, with a handle that required a specific grip to open and a...</p>
+          <div class="watt-card-meta">July 06, 2026</div>
+        </div>
+      </a>
+<a href="./blog/why-does-my-electric-bill-go-up-80-in-winter-when-im-not.html" class="watt-article-card">
+        <img src="./images/blog/why-does-my-electric-bill-go-up-80-in-winter-when-im-not.jpg" alt="Why Does My Electric Bill Go Up 80 In Winter When Im Not" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Why Does My Electric Bill Go Up 80 In Winter When Im Not</h3>
+          <p class="watt-card-excerpt">Why Does My Electric Bill Go Up $80 in Winter When I'm Not Even Home? Why does my electric bill go up $80 in winter when I'm not even home? I asked my...</p>
+          <div class="watt-card-meta">June 24, 2026</div>
+        </div>
+      </a>
+<a href="./blog/the-hidden-fees-on-your-electric-bill-base-charge.html" class="watt-article-card">
+        <img src="./images/blog/the-hidden-fees-on-your-electric-bill-base-charge.jpg" alt="The Hidden Fees on Your Electric Bill Base Charge | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Hidden Fees on Your Electric Bill Base Charge | WattWise</h3>
+          <p class="watt-card-excerpt">I get asked all the time: “Can I do my own energy audit?” The answer is yes. You won’t get a blower door number. You won’t have thermal images. But yo...</p>
+          <div class="watt-card-meta">June 04, 2026</div>
+        </div>
+      </a>
+    </div>
+    
+
+
+
+
+
+
+
+<!-- INDEX_ARTICLES_END -->
+    <div style="text-align:center;margin-top:32px;">
+      <a href="blog/index.html" class="watt-btn watt-btn-secondary">View All Articles</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Teaser -->
+<section class="watt-section">
+  <div class="watt-container" style="max-width:800px;">
+    <h2 class="watt-section-title" style="text-align:center;">Common Questions</h2>
+    <div style="background:var(--watt-white);border-radius:var(--watt-radius-lg);padding:32px;box-shadow:var(--watt-shadow);">
+      <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--watt-border);">
+        <h4 style="font-size:1.1rem;margin-bottom:8px;">Are the calculators really free?</h4>
+        <p style="color:var(--watt-text-light);margin:0;">Yes. No signup, no email, no credit card. Your data stays in your browser.</p>
+      </div>
+      <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--watt-border);">
+        <h4 style="font-size:1.1rem;margin-bottom:8px;">How accurate are the savings estimates?</h4>
+        <p style="color:var(--watt-text-light);margin:0;">Based on national averages and DOE data. Use them as a starting point, then consult a professional.</p>
+      </div>
+      <div>
+        <h4 style="font-size:1.1rem;margin-bottom:8px;">Can I export my results?</h4>
+        <p style="color:var(--watt-text-light);margin:0;">Every tool generates a PDF report and saves your history locally for comparison.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:24px;">
+      <a href="faq.html" class="watt-btn watt-btn-secondary">View All FAQ</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Ad -->
+<div class="watt-container">
+  <div class="watt-ad-label">Advertisement</div>
+  <div id="footer" data-ad-slot="footer" class="watt-ad-slot"></div>
+</div>
+
+<!-- Footer -->
+<footer class="watt-footer">
+  <div class="watt-footer-grid">
+    <div>
+      <h4>Tools</h4>
+      <a href="tools/energy-bill-calculator.html">Bill Breakdown</a>
+      <a href="tools/solar-roi-calculator.html">Solar ROI</a>
+      <a href="tools/hvac-efficiency-analyzer.html">HVAC Analyzer</a>
+      <a href="tools/led-savings-calculator.html">LED Savings</a>
+      <a href="tools/insulation-roi-calculator.html">Insulation ROI</a>
+      <a href="tools/time-of-use-optimizer.html">TOU Optimizer</a>
+    </div>
+    <div>
+      <h4>Blog</h4>
+      <a href="blog/index.html">All Articles</a>
+      <a href="blog/index.html">Energy Saving Tips</a>
+      <a href="blog/index.html">Solar Guides</a>
+      <a href="blog/index.html">HVAC & Insulation</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="faq.html">FAQ</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="disclosure.html">Disclosure</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Use</a>
+    </div>
+  </div>
+  <div class="watt-footer-bottom">
+    <p>2026 WattWise. All rights reserved. | wattwisepro.org</p>
+  </div>
+</footer>
+
+<script src="ads-loader.js"></script>
+</body>
+</html>
