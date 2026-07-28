@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog | WattWise - Home Energy Efficiency & Savings</title>
+<meta name="description" content="Articles, stories, and guides about reducing your electric bill, home energy efficiency, solar power, HVAC optimization, and utility rate decoding.">
+<link rel="canonical" href="https://wattwisepro.org/blog/">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<meta property="og:title" content="Blog | WattWise - Home Energy Efficiency & Savings">
+<meta property="og:description" content="Articles, stories, and guides about reducing your electric bill and home energy efficiency.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wattwisepro.org/blog/">
+<meta property="og:image" content="https://wattwisepro.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wattwisepro.org/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://wattwisepro.org/blog/"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"WattWise Blog","url":"https://wattwisepro.org/blog/","description":"Home energy efficiency articles and guides"}</script>
+<link rel="stylesheet" href="../style.css">
+<style>
+/* Blog Layout — ALL cards identical, build.py safe */
+.watt-blog-hero {
+  background: linear-gradient(135deg, var(--watt-primary-dark) 0%, var(--watt-primary) 100%);
+  color: var(--watt-white);
+  padding: 56px 0 48px;
+  text-align: center;
+}
+.watt-blog-hero h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.watt-blog-hero p {
+  opacity: 0.85;
+  font-size: 1.15rem;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Grid: 3 columns, ALL cards same size */
+.watt-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 32px;
+}
+
+/* Ad banner inside grid — spans full width */
+.watt-ad-banner {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 250px;
+  background: var(--watt-bg-dark);
+  border-radius: var(--watt-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+/* Filter buttons */
+.watt-blog-filter {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.watt-blog-filter button {
+  padding: 8px 18px;
+  border: 2px solid var(--watt-border);
+  background: var(--watt-white);
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.watt-blog-filter button:hover, .watt-blog-filter button.active {
+  background: var(--watt-primary);
+  color: var(--watt-white);
+  border-color: var(--watt-primary);
+}
+
+/* Ad wrapper for top/bottom */
+.watt-ad-wrapper {
+  max-width: var(--watt-max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.watt-ad-wrapper .watt-ad-slot {
+  width: 100%;
+  height: 250px;
+  background: var(--watt-bg-dark);
+  border-radius: var(--watt-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px 0;
+}
+.watt-ad-label {
+  font-size: 0.7rem;
+  color: var(--watt-text-light);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+  .watt-blog-grid { grid-template-columns: 1fr; }
+  .watt-blog-hero h1 { font-size: 1.8rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="watt-nav">
+  <div class="watt-nav-container">
+    <a href="../index.html" class="watt-nav-logo">Watt<span>Wise</span></a>
+    <button class="watt-nav-menu-btn" onclick="document.querySelector('.watt-nav-links').classList.toggle('active')" aria-label="Toggle menu">☰</button>
+    <ul class="watt-nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../tools/index.html">Tools</a></li>
+      <li><a href="index.html">Blog</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+      <li><a href="../faq.html">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="watt-breadcrumb" aria-label="breadcrumb">
+  <ol>
+    <li><a href="../index.html">Home</a></li>
+    <li aria-current="page">Blog</li>
+  </ol>
+</nav>
+
+<!-- Ad: blog_top -->
+<div class="watt-ad-wrapper">
+  <div class="watt-ad-label">Advertisement</div>
+  <div id="blog_top" data-ad-slot="blog_top" class="watt-ad-slot"></div>
+</div>
+
+<section class="watt-blog-hero">
+  <div class="watt-container">
+    <h1>The WattWise Blog</h1>
+    <p>Real stories, hard numbers, and utility-bill decoding from someone who spent 25 years inside the industry.</p>
+  </div>
+</section>
+
+<main class="watt-section">
+  <div class="watt-container">
+    <div class="watt-blog-filter">
+      <button class="active" onclick="filterBlog('all')">All</button>
+      <button onclick="filterBlog('Story')">Stories</button>
+      <button onclick="filterBlog('Tutorial')">Tutorials</button>
+      <button onclick="filterBlog('Concept')">Concepts</button>
+    </div>
+
+    <!-- BLOG_ARTICLES_START -->
+
+
+
+
+
+    <div class="watt-blog-grid" id="blogGrid">
+      <a href="./solar-panel-payback-real-numbers-2026.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/solar-panel-payback-real-numbers-2026.jpg" alt="Solar Panel Payback Real Numbers 2026" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Solar Panel Payback Real Numbers 2026</h3>
+          <p class="watt-card-excerpt">My solar panels paid for themselves in five years. Not the eight years the installer predicted. Not the ten years the skeptics warned about. Five. And...</p>
+          <div class="watt-card-meta">July 23, 2026</div>
+        </div>
+      </a>
+<a href="./the-solar-panels-i-installed-and-the-battery-backup-i-wish-i-had-bought-first.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-solar-panels-i-installed-and-the-battery-backup-i-wish-i-had-bought-first.jpg" alt="The Solar Panels I Installed And The Battery Backup I Wish I Had Bought First" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Solar Panels I Installed And The Battery Backup I Wish I Had Bought First</h3>
+          <p class="watt-card-excerpt">The Solar Panels I Installed and the Battery Backup I Wish I Had Bought First I was standing in my driveway in Denver at 3:00 PM on a Tuesday in July,...</p>
+          <div class="watt-card-meta">July 13, 2026</div>
+        </div>
+      </a>
+<a href="./austin-heat-watt-usage-explosion.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/austin-heat-watt-usage-explosion.jpg" alt="Austin Heat Watt Usage Explosion" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Austin Heat Watt Usage Explosion</h3>
+          <p class="watt-card-excerpt">Why My Watt Usage Tracker Said I Was "Efficient"—While My Bill Hit $340 Ryan Mitchell I was checking my smart home energy app on the first of August w...</p>
+          <div class="watt-card-meta">July 06, 2026</div>
+        </div>
+      </a>
+<a href="./old-fridge-cost-200-year-replaced.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/old-fridge-cost-200-year-replaced.jpg" alt="Old Fridge Cost 200 Year Replaced" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Old Fridge Cost 200 Year Replaced</h3>
+          <p class="watt-card-excerpt">My refrigerator was older than some of my coworkers. It was a 1998 Whirlpool, avocado green, with a handle that required a specific grip to open and a...</p>
+          <div class="watt-card-meta">July 06, 2026</div>
+        </div>
+      </a>
+<a href="./why-does-my-electric-bill-go-up-80-in-winter-when-im-not.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/why-does-my-electric-bill-go-up-80-in-winter-when-im-not.jpg" alt="Why Does My Electric Bill Go Up 80 In Winter When Im Not" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Why Does My Electric Bill Go Up 80 In Winter When Im Not</h3>
+          <p class="watt-card-excerpt">Why Does My Electric Bill Go Up $80 in Winter When I'm Not Even Home? Why does my electric bill go up $80 in winter when I'm not even home? I asked my...</p>
+          <div class="watt-card-meta">June 24, 2026</div>
+        </div>
+      </a>
+<a href="./the-hidden-fees-on-your-electric-bill-base-charge.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-hidden-fees-on-your-electric-bill-base-charge.jpg" alt="The Hidden Fees on Your Electric Bill Base Charge | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Hidden Fees on Your Electric Bill Base Charge | WattWise</h3>
+          <p class="watt-card-excerpt">I get asked all the time: “Can I do my own energy audit?” The answer is yes. You won’t get a blower door number. You won’t have thermal images. But yo...</p>
+          <div class="watt-card-meta">June 04, 2026</div>
+        </div>
+      </a>
+<a href="./your-5-step-home-energy-action-plan.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/your-5-step-home-energy-action-plan.jpg" alt="Your 5-Step Home Energy Action Plan | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Your 5-Step Home Energy Action Plan | WattWise</h3>
+          <p class="watt-card-excerpt">I had a refrigerator in my basement for about ten years. It was a hand‑me‑down from my parents, a Harvest Gold beast from the late 1990s. It kept beer...</p>
+          <div class="watt-card-meta">June 03, 2026</div>
+        </div>
+      </a>
+<a href="./net-metering-vs-net-billing-what-solar-owners-must.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/net-metering-vs-net-billing-what-solar-owners-must.jpg" alt="Net Metering vs Net Billing What Solar Owners Must | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Net Metering vs Net Billing What Solar Owners Must | WattWise</h3>
+          <p class="watt-card-excerpt">I had a client named Teresa call me last year. She was furious. Her electric bill had gone up $40 in one month, but her usage had barely changed. She ...</p>
+          <div class="watt-card-meta">May 30, 2026</div>
+        </div>
+      </a>
+<a href="./the-refrigerator-that-was-costing-me-300-a-year-an.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-refrigerator-that-was-costing-me-300-a-year-an.jpg" alt="The Refrigerator That Was Costing Me 300 a Year An | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Refrigerator That Was Costing Me 300 a Year An | WattWise</h3>
+          <p class="watt-card-excerpt">A few winters ago I decided I was going to save money by turning my thermostat way down at night. I set it to 55°F from 10 PM to 6 AM. I thought I was...</p>
+          <div class="watt-card-meta">May 30, 2026</div>
+        </div>
+      </a>
+<div class="watt-ad-slot has-content" data-ad-slot="blog_mid" style="width:100%;height:250px;margin:20px 0;grid-column:1/-1;"></div>
+<a href="./ev-charging-at-home-level-1-vs-level-2-vs-time-of.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/ev-charging-at-home-level-1-vs-level-2-vs-time-of.jpg" alt="EV Charging at Home Level 1 vs Level 2 vs Time-of- | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">EV Charging at Home Level 1 vs Level 2 vs Time-of- | WattWise</h3>
+          <p class="watt-card-excerpt">I got a call from a guy named Paul last spring. He had just signed a solar contract. Twenty‑four panels, 8.4 kilowatts, $32,000 before incentives. He ...</p>
+          <div class="watt-card-meta">May 28, 2026</div>
+        </div>
+      </a>
+<a href="./the-ceiling-fan-lie-that-cost-me-a-summer.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-ceiling-fan-lie-that-cost-me-a-summer.jpg" alt="The Ceiling Fan Lie That Cost Me a Summer | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Ceiling Fan Lie That Cost Me a Summer | WattWise</h3>
+          <p class="watt-card-excerpt">I had a client named Ellen call me last year. Her house had single‑pane windows from the 1970s. They were drafty. In winter, she could feel cold air p...</p>
+          <div class="watt-card-meta">May 24, 2026</div>
+        </div>
+      </a>
+<a href="./solar-installation-checklist-6-things-to-verify-be.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/solar-installation-checklist-6-things-to-verify-be.jpg" alt="Solar Installation Checklist 6 Things to Verify Be | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Solar Installation Checklist 6 Things to Verify Be | WattWise</h3>
+          <p class="watt-card-excerpt">I was talking to a client in Hawaii last year. Her electric bill was $450 for a small two‑bedroom condo. She used air conditioning maybe two hours a d...</p>
+          <div class="watt-card-meta">May 23, 2026</div>
+        </div>
+      </a>
+<a href="./energy-burden-when-your-electric-bill-eats-15-of-y.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/energy-burden-when-your-electric-bill-eats-15-of-y.jpg" alt="Energy Burden When Your Electric Bill Eats 15 of Y | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Energy Burden When Your Electric Bill Eats 15 of Y | WattWise</h3>
+          <p class="watt-card-excerpt">I was talking to a neighbor last week. He told me he pays $0.12 per kilowatt‑hour for electricity. I asked him if that was the supply rate or the all‑...</p>
+          <div class="watt-card-meta">May 20, 2026</div>
+        </div>
+      </a>
+<a href="./the-1920s-bungalow-with-no-insulation-corrected.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-1920s-bungalow-with-no-insulation-corrected.jpg" alt="The 1920s Bungalow With No Insulation Corrected | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The 1920s Bungalow With No Insulation Corrected | WattWise</h3>
+          <p class="watt-card-excerpt">I had a client named Sarah call me last spring. She was excited. She had just signed up for her utility’s “100% renewable energy” plan. She told me sh...</p>
+          <div class="watt-card-meta">May 20, 2026</div>
+        </div>
+      </a>
+<a href="./the-400-electric-bill-that-was-just-a-leaky-duct.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-400-electric-bill-that-was-just-a-leaky-duct.jpg" alt="The 400 Electric Bill That Was Just a Leaky Duct | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The 400 Electric Bill That Was Just a Leaky Duct | WattWise</h3>
+          <p class="watt-card-excerpt">I was in an attic last week that had fiberglass batts installed in 1985. They were dirty, compressed, and full of mouse droppings. The homeowner, a wo...</p>
+          <div class="watt-card-meta">May 20, 2026</div>
+        </div>
+      </a>
+<a href="./the-truth-about-100-renewable-energy-utility-plans.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-truth-about-100-renewable-energy-utility-plans.jpg" alt="The Truth About 100 Renewable Energy Utility Plans | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Truth About 100 Renewable Energy Utility Plans | WattWise</h3>
+          <p class="watt-card-excerpt">I was at a friend’s house last year and noticed she had her dryer running almost constantly. Two kids, lots of sports uniforms, she was doing laundry ...</p>
+          <div class="watt-card-meta">May 20, 2026</div>
+        </div>
+      </a>
+<a href="./my-refrigerator-was-25-years-old-heres-what-i-did.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/my-refrigerator-was-25-years-old-heres-what-i-did.jpg" alt="My Refrigerator Was 25 Years Old Heres What I Did | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">My Refrigerator Was 25 Years Old Heres What I Did | WattWise</h3>
+          <p class="watt-card-excerpt">I got an email last month from a woman in California. She had installed solar panels in 2021. Her system was producing plenty of power. Her electric b...</p>
+          <div class="watt-card-meta">May 18, 2026</div>
+        </div>
+      </a>
+<a href="./diy-home-energy-audit-a-weekend-walkthrough.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/diy-home-energy-audit-a-weekend-walkthrough.jpg" alt="DIY Home Energy Audit A Weekend Walkthrough | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">DIY Home Energy Audit A Weekend Walkthrough | WattWise</h3>
+          <p class="watt-card-excerpt">I got a call from a woman named Laura a few winters ago. She owned a 1925 bungalow in Denver’s historic district. Charming house. Original wood floors...</p>
+          <div class="watt-card-meta">May 16, 2026</div>
+        </div>
+      </a>
+<div class="watt-ad-slot has-content" data-ad-slot="blog_mid" style="width:100%;height:250px;margin:20px 0;grid-column:1/-1;"></div>
+<a href="./the-utility-bill-that-dropped-40-after-one-hour-of.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-utility-bill-that-dropped-40-after-one-hour-of.jpg" alt="The Utility Bill That Dropped 40 After One Hour of | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Utility Bill That Dropped 40 After One Hour of | WattWise</h3>
+          <p class="watt-card-excerpt">The smell was the first clue. A musty, burning smell that started faint and got worse over a few weeks. I ignored it. I thought maybe the neighbors we...</p>
+          <div class="watt-card-meta">May 16, 2026</div>
+        </div>
+      </a>
+<a href="./state-by-state-electricity-rates-are-you-paying-to.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/state-by-state-electricity-rates-are-you-paying-to.jpg" alt="State-by-State Electricity Rates Are You Paying To | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">State-by-State Electricity Rates Are You Paying To | WattWise</h3>
+          <p class="watt-card-excerpt">I had a client named Theresa call me last winter. Her gas furnace was 22 years old. It still ran, but it made a noise like a dying animal. She knew sh...</p>
+          <div class="watt-card-meta">May 07, 2026</div>
+        </div>
+      </a>
+<a href="./heat-pumps-vs-gas-furnaces-the-real-cost-compariso.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/heat-pumps-vs-gas-furnaces-the-real-cost-compariso.jpg" alt="Heat Pumps vs Gas Furnaces The Real Cost Compariso | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Heat Pumps vs Gas Furnaces The Real Cost Compariso | WattWise</h3>
+          <p class="watt-card-excerpt">I’ve seen a lot of smart thermostats installed backwards. People buy them, stick them on the wall, set the temperature to 72 degrees, and never touch ...</p>
+          <div class="watt-card-meta">May 02, 2026</div>
+        </div>
+      </a>
+<a href="./the-150-mistake-i-made-with-my-thermostat-no-subhe.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-150-mistake-i-made-with-my-thermostat-no-subhe.jpg" alt="The 150 Mistake I Made with My Thermostat No Subhe | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The 150 Mistake I Made with My Thermostat No Subhe | WattWise</h3>
+          <p class="watt-card-excerpt">I got a call from a client named Marcus last month. He had just bought an electric car. A Chevy Bolt. He loved it. But his electric bill had gone up $...</p>
+          <div class="watt-card-meta">April 29, 2026</div>
+        </div>
+      </a>
+<a href="./vampire-devices-the-always-on-electronics-costing.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/vampire-devices-the-always-on-electronics-costing.jpg" alt="Vampire Devices The Always-On Electronics Costing | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Vampire Devices The Always-On Electronics Costing | WattWise</h3>
+          <p class="watt-card-excerpt">I got a call from a guy named Tom a couple of years ago. He was frustrated. His electric bill had been creeping up for years, and he couldn’t figure o...</p>
+          <div class="watt-card-meta">April 26, 2026</div>
+        </div>
+      </a>
+<a href="./10-ways-to-lower-your-electric-bill-without-spendi.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/10-ways-to-lower-your-electric-bill-without-spendi.jpg" alt="10 Ways to Lower Your Electric Bill Without Spendi | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">10 Ways to Lower Your Electric Bill Without Spendi | WattWise</h3>
+          <p class="watt-card-excerpt">Let me tell you about a client I’ll call Karen. Not her real name. She lived in a 3,200‑square‑foot house outside Denver. Built in the 80s, central AC...</p>
+          <div class="watt-card-meta">April 24, 2026</div>
+        </div>
+      </a>
+<a href="./how-to-calculate-your-true-cost-per-kilowatt-hour.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/how-to-calculate-your-true-cost-per-kilowatt-hour.jpg" alt="How to Calculate Your True Cost Per Kilowatt-Hour | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">How to Calculate Your True Cost Per Kilowatt-Hour | WattWise</h3>
+          <p class="watt-card-excerpt">I had a client named Gary last summer. His air conditioner was 18 years old. It still worked. It still blew cold air. But his electric bills in July w...</p>
+          <div class="watt-card-meta">April 23, 2026</div>
+        </div>
+      </a>
+<a href="./the-time-i-forgot-about-my-dryer-vent-and-almost-b.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-time-i-forgot-about-my-dryer-vent-and-almost-b.jpg" alt="The Time I Forgot About My Dryer Vent and Almost B | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Time I Forgot About My Dryer Vent and Almost B | WattWise</h3>
+          <p class="watt-card-excerpt">I used to leave my ceiling fans running all day, even when I wasn’t home. I thought they were cooling the room. They’re not. Fans cool people, not spa...</p>
+          <div class="watt-card-meta">April 20, 2026</div>
+        </div>
+      </a>
+<a href="./attic-insulation-fiberglass-cellulose-or-spray-foa.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/attic-insulation-fiberglass-cellulose-or-spray-foa.jpg" alt="Attic Insulation Fiberglass Cellulose or Spray Foa | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Attic Insulation Fiberglass Cellulose or Spray Foa | WattWise</h3>
+          <p class="watt-card-excerpt">I have a client named Mike. He’s a retired engineer, which means he’s both the best and the worst kind of person to work with. Best because he loves d...</p>
+          <div class="watt-card-meta">April 07, 2026</div>
+        </div>
+      </a>
+<div class="watt-ad-slot has-content" data-ad-slot="blog_mid" style="width:100%;height:250px;margin:20px 0;grid-column:1/-1;"></div>
+<a href="./the-house-that-used-2000-kwh-more-than-its-twin-ne.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-house-that-used-2000-kwh-more-than-its-twin-ne.jpg" alt="The House That Used 2000 kWh More Than Its Twin Ne | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The House That Used 2000 kWh More Than Its Twin Ne | WattWise</h3>
+          <p class="watt-card-excerpt">After 25 years of auditing homes, I’ve seen the same mistakes over and over. People buy expensive windows when they need attic insulation. They instal...</p>
+          <div class="watt-card-meta">April 07, 2026</div>
+        </div>
+      </a>
+<a href="./one-year-after-solar-the-real-numbers-nobody-tells.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/one-year-after-solar-the-real-numbers-nobody-tells.jpg" alt="One Year After Solar The Real Numbers Nobody Tells | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">One Year After Solar The Real Numbers Nobody Tells | WattWise</h3>
+          <p class="watt-card-excerpt">I met a guy at a barbecue last summer. He told me his electric bill was out of control. He said he was thinking about buying solar panels or a new AC....</p>
+          <div class="watt-card-meta">April 01, 2026</div>
+        </div>
+      </a>
+<a href="./the-clothes-dryer-was-eating-200-a-year-and-i-didn.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/the-clothes-dryer-was-eating-200-a-year-and-i-didn.jpg" alt="The Clothes Dryer Was Eating 200 a Year and I Didn | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">The Clothes Dryer Was Eating 200 a Year and I Didn | WattWise</h3>
+          <p class="watt-card-excerpt">I met a woman named Rosa at a community energy fair last year. She lived in a small apartment with her two kids. She worked full‑time as a home health...</p>
+          <div class="watt-card-meta">April 01, 2026</div>
+        </div>
+      </a>
+<a href="./window-replacement-vs-window-film-which-saves-more.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/window-replacement-vs-window-film-which-saves-more.jpg" alt="Window Replacement vs Window Film Which Saves More | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Window Replacement vs Window Film Which Saves More | WattWise</h3>
+          <p class="watt-card-excerpt">I had a fridge in my basement for about six years. It was an old Kenmore, probably from the late 1990s. I used it for drinks and frozen pizzas. I neve...</p>
+          <div class="watt-card-meta">April 01, 2026</div>
+        </div>
+      </a>
+<a href="./smart-thermostat-programming-guide-save-200year-wi.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/smart-thermostat-programming-guide-save-200year-wi.jpg" alt="Smart Thermostat Programming Guide Save 200Year Wi | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">Smart Thermostat Programming Guide Save 200Year Wi | WattWise</h3>
+          <p class="watt-card-excerpt">I was at a friend’s house a few months ago. He was complaining about his electric bill. “It’s always high,” he said. “Even when we’re on vacation.” He...</p>
+          <div class="watt-card-meta">March 29, 2026</div>
+        </div>
+      </a>
+<a href="./what-is-seer2-and-why-your-old-ac-just-became-obso.html" class="watt-article-card" data-category="Story">
+        <img src="../images/blog/what-is-seer2-and-why-your-old-ac-just-became-obso.jpg" alt="What Is SEER2 and Why Your Old AC Just Became Obso | WattWise" class="watt-card-image" width="400" height="225" loading="lazy">
+        <div class="watt-card-body">
+          <span class="watt-card-tag">Story</span>
+          <h3 class="watt-card-title">What Is SEER2 and Why Your Old AC Just Became Obso | WattWise</h3>
+          <p class="watt-card-excerpt">A few years ago, I got a call from a woman named Diane. She lived in a subdivision where all the houses were built in the same year with the same floo...</p>
+          <div class="watt-card-meta">March 26, 2026</div>
+        </div>
+      </a>
+    </div>
+    
+
+
+
+
+<!-- BLOG_ARTICLES_END -->
+
+  </div>
+</main>
+
+<!-- Ad: blog_bottom -->
+<div class="watt-ad-wrapper">
+  <div class="watt-ad-label">Advertisement</div>
+  <div id="blog_bottom" data-ad-slot="blog_bottom" class="watt-ad-slot"></div>
+</div>
+
+<footer class="watt-footer">
+  <div class="watt-footer-grid">
+    <div>
+      <h4>Tools</h4>
+      <a href="../tools/energy-bill-calculator.html">Bill Breakdown</a>
+      <a href="../tools/solar-roi-calculator.html">Solar ROI</a>
+      <a href="../tools/hvac-efficiency-analyzer.html">HVAC Analyzer</a>
+      <a href="../tools/led-savings-calculator.html">LED Savings</a>
+      <a href="../tools/insulation-roi-calculator.html">Insulation ROI</a>
+      <a href="../tools/time-of-use-optimizer.html">TOU Optimizer</a>
+    </div>
+    <div>
+      <h4>Blog</h4>
+      <a href="index.html">All Articles</a>
+      <a href="index.html">Energy Saving Tips</a>
+      <a href="index.html">Solar Guides</a>
+      <a href="index.html">HVAC & Insulation</a>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../faq.html">FAQ</a>
+      <a href="../privacy.html">Privacy</a>
+      <a href="../terms.html">Terms</a>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <a href="../disclaimer.html">Disclaimer</a>
+      <a href="../disclosure.html">Disclosure</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms of Use</a>
+    </div>
+  </div>
+  <div class="watt-footer-bottom">
+    <p>2026 WattWise. All rights reserved. | wattwisepro.org</p>
+  </div>
+</footer>
+
+<script>
+function filterBlog(category) {
+  document.querySelectorAll('.watt-blog-filter button').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.watt-article-card').forEach(card => {
+    card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+  });
+}
+</script>
+
+<script src="../ads-loader.js"></script>
+</body>
+</html>
