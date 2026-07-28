@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LED Lighting Upgrade Savings Calculator | WattWise</title>
+<meta name="description" content="Calculate annual savings and CO2 reduction from switching to LED bulbs. Enter existing bulb count, wattage, and daily usage.">
+<link rel="canonical" href="https://wattwisepro.org/tools/led-savings-calculator.html">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<meta property="og:title" content="LED Lighting Upgrade Savings Calculator | WattWise">
+<meta property="og:description" content="Calculate annual savings and CO2 reduction from switching to LED bulbs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wattwisepro.org/tools/led-savings-calculator.html">
+<meta property="og:image" content="https://wattwisepro.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wattwisepro.org/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://wattwisepro.org/tools/"},{"@type":"ListItem","position":3,"name":"LED Savings","item":"https://wattwisepro.org/tools/led-savings-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"LED Lighting Upgrade Savings","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="watt-nav"><div class="watt-nav-container"><a href="../index.html" class="watt-nav-logo">Watt<span>Wise</span></a><button class="watt-nav-menu-btn" onclick="document.querySelector('.watt-nav-links').classList.toggle('active')" aria-label="Toggle menu">☰</button><ul class="watt-nav-links"><li><a href="../index.html">Home</a></li><li><a href="index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li></ul></div></nav>
+<nav class="watt-breadcrumb" aria-label="breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Tools</a></li><li aria-current="page">LED Savings</li></ol></nav>
+
+<div class="watt-container"><div class="watt-ad-label">Advertisement</div><div id="tool_top" data-ad-slot="tool_top" class="watt-ad-slot"></div></div>
+
+<header class="watt-tool-hero"><div class="watt-tool-container"><h1>LED Lighting Upgrade Savings</h1><p>Enter your existing bulbs and daily usage. Compare LED alternatives and see annual savings plus CO2 reduction estimates.</p></div></header>
+
+<div class="watt-tool-container">
+  <div style="display:flex;gap:8px;margin-bottom:24px;align-items:center;">
+    <div id="step1-indicator" style="flex:1;height:4px;background:var(--watt-primary);border-radius:2px;"></div>
+    <div id="step2-indicator" style="flex:1;height:4px;background:var(--watt-border);border-radius:2px;"></div>
+    <div id="step3-indicator" style="flex:1;height:4px;background:var(--watt-border);border-radius:2px;"></div>
+  </div>
+
+  <div id="step1" class="watt-tool-panel">
+    <h3 style="margin-bottom:20px;">Step 1: Your Lighting Setup</h3>
+    <div class="watt-form-row">
+      <div class="watt-form-group"><label>Number of Bulbs</label><input type="number" id="bulbCount" placeholder="e.g. 25" min="1"></div>
+      <div class="watt-form-group"><label>Current Bulb Wattage (W)</label><input type="number" id="currentWattage" placeholder="e.g. 60" min="1"></div>
+    </div>
+    <div class="watt-form-row">
+      <div class="watt-form-group"><label>Hours Used Per Day</label><input type="number" id="hoursPerDay" placeholder="e.g. 5" step="0.5" min="0.5"></div>
+      <div class="watt-form-group"><label>Electricity Rate ($/kWh)</label><input type="number" id="ledRate" placeholder="e.g. 0.145" step="0.001"></div>
+    </div>
+    <div class="watt-form-row">
+      <div class="watt-form-group"><label>LED Equivalent Wattage (W)</label><input type="number" id="ledWattage" placeholder="e.g. 9" value="9" min="1"></div>
+      <div class="watt-form-group"><label>Cost per LED Bulb ($)</label><input type="number" id="ledBulbCost" placeholder="e.g. 3.50" value="3.50" step="0.01"></div>
+    </div>
+    <div class="watt-form-group"><label>Bulb Type</label>
+      <select id="bulbType">
+        <option value="incandescent">Incandescent</option>
+        <option value="halogen">Halogen</option>
+        <option value="cfl">CFL (Compact Fluorescent)</option>
+        <option value="other_led">Other LED (older/less efficient)</option>
+      </select>
+    </div>
+    <div class="watt-tool-actions">
+      <button class="watt-btn watt-btn-primary" onclick="calculateLED()">Calculate Savings</button>
+      <button class="watt-btn watt-btn-secondary" onclick="resetLED()">Reset</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--watt-text-light);margin-top:12px;">All data stays in your browser. Nothing is sent to our servers.</p>
+  </div>
+
+  <div id="step2" class="watt-tool-panel" style="display:none;">
+    <h3 style="margin-bottom:20px;">Step 2: Savings Analysis</h3>
+    <div class="watt-result-grid" id="ledResultGrid"></div>
+    <div class="watt-chart-container"><canvas id="ledChart"></canvas></div>
+    <div class="watt-result-box">
+      <h4>Environmental Impact</h4>
+      <p id="ledEnvImpact"></p>
+    </div>
+    <div class="watt-tool-actions">
+      <button class="watt-btn watt-btn-primary" onclick="saveLEDHistory()">Save to History</button>
+      <button class="watt-btn watt-btn-secondary" onclick="exportLEDPDF()">Export PDF</button>
+      <button class="watt-btn watt-btn-accent" onclick="showLEDStep(1)">Edit Inputs</button>
+    </div>
+  </div>
+
+  <div id="step3" class="watt-tool-panel" style="display:none;">
+    <h3 style="margin-bottom:20px;">Step 3: History & Comparison</h3>
+    <div id="ledHistorySection">
+      <h4 style="margin-bottom:12px;">Saved Calculations</h4>
+      <ul class="watt-history-list" id="ledHistoryList"></ul>
+      <button class="watt-btn watt-btn-secondary" onclick="clearLEDHistory()">Clear History</button>
+    </div>
+  </div>
+</div>
+
+<div class="watt-container"><div class="watt-ad-label">Advertisement</div><div id="tool_middle" data-ad-slot="tool_middle" class="watt-ad-slot"></div></div>
+
+<section class="watt-section" style="background:var(--watt-bg-dark);">
+  <div class="watt-container">
+    <div class="watt-post-footer-grid">
+      <div>
+        <h3 class="watt-footer-col-title">Related Articles</h3>
+        <div class="watt-related-card"><a href="../blog/solar-installation-checklist-6-things-to-verify-be.html"><h4>Solar Installation Checklist 6 Things to Verify Be</h4><p>I got a call from a guy named Paul last spring. He had just signed a solar contr...</p></a></div>
+        <div class="watt-related-card"><a href="../blog/smart-thermostat-programming-guide-save-200year-wi.html"><h4>Smart Thermostat Programming Guide Save 200Year Wi</h4><p>I’ve seen a lot of smart thermostats installed backwards. People buy them, stick...</p></a></div>
+        <div class="watt-related-card"><a href="../blog/10-ways-to-lower-your-electric-bill-without-spendi.html"><h4>10 Ways to Lower Your Electric Bill Without Spendi</h4><p>I met a guy at a barbecue last summer. He told me his electric bill was out of c...</p></a></div>
+      </div>
+      <div>
+        <h3 class="watt-footer-col-title">Recommended Tools</h3>
+        <div class="watt-tool-rec-card"><a href="energy-bill-calculator.html"><h4>Bill Breakdown</h4><p>See how much lighting costs you today.</p></a></div>
+        <div class="watt-tool-rec-card"><a href="hvac-efficiency-analyzer.html"><h4>HVAC Analyzer</h4><p>Your biggest energy user needs attention too.</p></a></div>
+        <div class="watt-tool-rec-card"><a href="time-of-use-optimizer.html"><h4>TOU Optimizer</h4><p>Run lights during cheaper rate hours.</p></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="watt-container"><div class="watt-ad-label">Advertisement</div><div id="tool_bottom" data-ad-slot="tool_bottom" class="watt-ad-slot"></div></div>
+
+
+<footer class="watt-footer">
+  <div class="watt-footer-grid">
+    <div><h4>Tools</h4><a href="energy-bill-calculator.html">Bill Breakdown</a><a href="solar-roi-calculator.html">Solar ROI</a><a href="hvac-efficiency-analyzer.html">HVAC Analyzer</a><a href="led-savings-calculator.html">LED Savings</a><a href="insulation-roi-calculator.html">Insulation ROI</a><a href="time-of-use-optimizer.html">TOU Optimizer</a></div>
+    <div><h4>Blog</h4><a href="../blog/index.html">All Articles</a><a href="../blog/index.html">Energy Saving Tips</a><a href="../blog/index.html">Solar Guides</a><a href="../blog/index.html">HVAC & Insulation</a></div>
+    <div><h4>Company</h4><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../faq.html">FAQ</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+    <div><h4>Legal</h4><a href="../disclaimer.html">Disclaimer</a><a href="../disclosure.html">Disclosure</a><a href="../privacy.html">Privacy Policy</a><a href="../terms.html">Terms of Use</a></div>
+  </div>
+  <div class="watt-footer-bottom"><p>2026 WattWise. All rights reserved. | wattwisepro.org</p></div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+const LED_STORAGE = 'watt-led-history';
+let ledResult = null;
+const CO2_PER_KWH = 0.85; // lbs CO2 per kWh (US average)
+
+function showLEDStep(n) {
+  document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
+  document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
+  document.getElementById('step3').style.display = n === 3 ? 'block' : 'none';
+  document.getElementById('step1-indicator').style.background = n >= 1 ? 'var(--watt-primary)' : 'var(--watt-border)';
+  document.getElementById('step2-indicator').style.background = n >= 2 ? 'var(--watt-primary)' : 'var(--watt-border)';
+  document.getElementById('step3-indicator').style.background = n >= 3 ? 'var(--watt-primary)' : 'var(--watt-border)';
+}
+
+function calculateLED() {
+  const count = parseInt(document.getElementById('bulbCount').value);
+  const currentW = parseFloat(document.getElementById('currentWattage').value);
+  const hours = parseFloat(document.getElementById('hoursPerDay').value);
+  const rate = parseFloat(document.getElementById('ledRate').value);
+  const ledW = parseFloat(document.getElementById('ledWattage').value);
+  const bulbCost = parseFloat(document.getElementById('ledBulbCost').value);
+  const bulbType = document.getElementById('bulbType').value;
+
+  if (!count || !currentW || !hours || !rate || !ledW) { alert('Please fill in all required fields'); return; }
+
+  const currentKwh = (count * currentW * hours * 365) / 1000;
+  const ledKwh = (count * ledW * hours * 365) / 1000;
+  const savedKwh = currentKwh - ledKwh;
+  const annualSavings = savedKwh * rate;
+  const upgradeCost = count * bulbCost;
+  const paybackMonths = upgradeCost / (annualSavings / 12);
+  const tenYearSavings = annualSavings * 10 - upgradeCost;
+  const co2Saved = savedKwh * CO2_PER_KWH;
+  const co2SavedYear = co2Saved;
+
+  // 10-year projection
+  const yearlyData = [];
+  let cumulative = -upgradeCost;
+  for (let y = 1; y <= 10; y++) {
+    cumulative += annualSavings;
+    yearlyData.push({ year: y, savings: annualSavings, cumulative: cumulative });
+  }
+
+  ledResult = {
+    count, currentW, hours, rate, ledW, bulbCost, bulbType,
+    currentKwh, ledKwh, savedKwh, annualSavings, upgradeCost,
+    paybackMonths, tenYearSavings, co2SavedYear, yearlyData,
+    date: new Date().toLocaleDateString()
+  };
+
+  renderLEDResults();
+  showLEDStep(2);
+}
+
+function renderLEDResults() {
+  const r = ledResult;
+  const grid = document.getElementById('ledResultGrid');
+  grid.innerHTML = `
+    <div class="watt-result-item"><div class="value">$${r.annualSavings.toFixed(0)}</div><div class="label">Annual Savings</div></div>
+    <div class="watt-result-item"><div class="value">${r.paybackMonths.toFixed(1)} mo</div><div class="label">Payback Period</div></div>
+    <div class="watt-result-item"><div class="value">$${r.tenYearSavings.toFixed(0)}</div><div class="label">10-Year Net Savings</div></div>
+    <div class="watt-result-item"><div class="value">${r.savedKwh.toFixed(0)}</div><div class="label">kWh Saved/Year</div></div>
+    <div class="watt-result-item"><div class="value">${r.co2SavedYear.toFixed(0)}</div><div class="label">lbs CO2 Saved/Year</div></div>
+    <div class="watt-result-item"><div class="value">$${r.upgradeCost.toFixed(0)}</div><div class="label">Upgrade Cost</div></div>
+  `;
+
+  document.getElementById('ledEnvImpact').innerHTML = `
+    Switching <strong>${r.count}</strong> ${r.bulbType} bulbs to LED saves 
+    <strong>${r.savedKwh.toFixed(0)} kWh</strong> per year, which prevents approximately 
+    <strong>${r.co2SavedYear.toFixed(0)} pounds</strong> of CO2 emissions annually. 
+    That's equivalent to driving a car <strong>${(r.co2SavedYear / 19.6).toFixed(0)} miles</strong> less per year.
+  `;
+
+  drawLEDChart(r.yearlyData, r.upgradeCost);
+}
+
+function drawLEDChart(data, cost) {
+  const canvas = document.getElementById('ledChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr; canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  const w = rect.width, h = rect.height;
+  const pad = { top: 30, right: 20, bottom: 40, left: 60 };
+  const chartW = w - pad.left - pad.right;
+  const chartH = h - pad.top - pad.bottom;
+  const maxVal = Math.max(...data.map(d => d.cumulative), cost * 0.5);
+  const minVal = Math.min(...data.map(d => d.cumulative), -cost);
+  const range = maxVal - minVal;
+
+  ctx.clearRect(0, 0, w, h);
+  ctx.strokeStyle = '#e9ecef'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) {
+    const y = pad.top + chartH - (i / 5) * chartH;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + chartW, y); ctx.stroke();
+    ctx.fillStyle = '#6c757d'; ctx.font = '11px Segoe UI'; ctx.textAlign = 'right';
+    const val = minVal + (range * i / 5);
+    ctx.fillText('$' + (val / 1000).toFixed(1) + 'k', pad.left - 8, y + 3);
+  }
+  ctx.fillStyle = '#6c757d'; ctx.textAlign = 'center';
+  for (let i = 0; i < data.length; i += 2) {
+    const x = pad.left + (i / (data.length - 1)) * chartW;
+    ctx.fillText('Y' + data[i].year, x, pad.top + chartH + 16);
+  }
+
+  ctx.strokeStyle = '#1a5f2a'; ctx.lineWidth = 3;
+  ctx.beginPath();
+  data.forEach((d, i) => {
+    const x = pad.left + (i / (data.length - 1)) * chartW;
+    const y = pad.top + chartH - ((d.cumulative - minVal) / range) * chartH;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+
+  // Zero line
+  const zeroY = pad.top + chartH - ((0 - minVal) / range) * chartH;
+  ctx.strokeStyle = '#e76f51'; ctx.setLineDash([5, 5]); ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.left, zeroY); ctx.lineTo(pad.left + chartW, zeroY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#e76f51'; ctx.font = 'bold 11px Segoe UI'; ctx.textAlign = 'left';
+  ctx.fillText('Break-even', pad.left + 4, zeroY - 4);
+
+  ctx.fillStyle = '#212529'; ctx.font = 'bold 13px Segoe UI'; ctx.textAlign = 'left';
+  ctx.fillText('10-Year Net Savings (After Upgrade Cost)', pad.left, 18);
+}
+
+function saveLEDHistory() {
+  if (!ledResult) return;
+  let history = JSON.parse(localStorage.getItem(LED_STORAGE) || '[]');
+  history.unshift(ledResult);
+  if (history.length > 10) history = history.slice(0, 10);
+  localStorage.setItem(LED_STORAGE, JSON.stringify(history));
+  renderLEDHistory(); showLEDStep(3);
+}
+
+function renderLEDHistory() {
+  const list = document.getElementById('ledHistoryList');
+  const history = JSON.parse(localStorage.getItem(LED_STORAGE) || '[]');
+  if (history.length === 0) { list.innerHTML = '<li style="color:var(--watt-text-light);">No saved calculations yet.</li>'; return; }
+  list.innerHTML = history.map((h, i) => `
+    <li onclick="loadLEDHistory(${i})">
+      <div><strong>${h.count} bulbs</strong> · ${h.currentW}W→${h.ledW}W · $${h.annualSavings.toFixed(0)}/yr</div>
+      <div class="date">${h.date}</div>
+    </li>
+  `).join('');
+}
+
+function loadLEDHistory(index) {
+  const history = JSON.parse(localStorage.getItem(LED_STORAGE) || '[]');
+  if (history[index]) { ledResult = history[index]; renderLEDResults(); showLEDStep(2); }
+}
+
+function clearLEDHistory() {
+  if (confirm('Clear all saved LED calculations?')) { localStorage.removeItem(LED_STORAGE); renderLEDHistory(); }
+}
+
+function resetLED() {
+  ['bulbCount','currentWattage','hoursPerDay','ledRate','ledWattage','ledBulbCost'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('bulbType').value = 'incandescent';
+  ledResult = null; showLEDStep(1);
+}
+
+function exportLEDPDF() {
+  if (!ledResult) return;
+  const r = ledResult;
+  let text = `WATTWISE - LED LIGHTING UPGRADE SAVINGS
+Generated: ${new Date().toLocaleString()}
+
+`;
+  text += `INPUTS:
+`;
+  text += `  Bulb Count: ${r.count}
+`;
+  text += `  Current Wattage: ${r.currentW}W each (${r.bulbType})
+`;
+  text += `  LED Wattage: ${r.ledW}W each
+`;
+  text += `  Hours/Day: ${r.hours}
+`;
+  text += `  Electricity Rate: $${r.rate.toFixed(3)}/kWh
+`;
+  text += `  LED Bulb Cost: $${r.bulbCost.toFixed(2)} each
+
+`;
+  text += `RESULTS:
+`;
+  text += `  Current Annual kWh: ${r.currentKwh.toFixed(0)}
+`;
+  text += `  LED Annual kWh: ${r.ledKwh.toFixed(0)}
+`;
+  text += `  kWh Saved/Year: ${r.savedKwh.toFixed(0)}
+`;
+  text += `  Annual Savings: $${r.annualSavings.toFixed(2)}
+`;
+  text += `  Upgrade Cost: $${r.upgradeCost.toFixed(2)}
+`;
+  text += `  Payback: ${r.paybackMonths.toFixed(1)} months
+`;
+  text += `  10-Year Net Savings: $${r.tenYearSavings.toFixed(0)}
+`;
+  text += `  CO2 Saved/Year: ${r.co2SavedYear.toFixed(0)} lbs
+
+`;
+  text += `---
+wattwisepro.org | All data stays in your browser`;
+
+  const blob = new Blob([text], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `wattwise-led-savings-${Date.now()}.txt`; a.click();
+  URL.revokeObjectURL(url);
+}
+
+renderLEDHistory();
+</script>
+</body>
+</html>
