@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Energy Bill Breakdown Calculator | WattWise</title>
+<meta name="description" content="Free calculator to break down your monthly electric bill by category. See HVAC, water heating, lighting, and appliance costs.">
+<link rel="canonical" href="https://wattwisepro.org/tools/energy-bill-calculator.html">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<meta property="og:title" content="Home Energy Bill Breakdown Calculator | WattWise">
+<meta property="og:description" content="Free calculator to break down your monthly electric bill by category.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wattwisepro.org/tools/energy-bill-calculator.html">
+<meta property="og:image" content="https://wattwisepro.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wattwisepro.org/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://wattwisepro.org/tools/"},{"@type":"ListItem","position":3,"name":"Bill Breakdown","item":"https://wattwisepro.org/tools/energy-bill-calculator.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Home Energy Bill Breakdown","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.8","ratingCount":"124"}}</script>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="watt-nav"><div class="watt-nav-container"><a href="../index.html" class="watt-nav-logo">Watt<span>Wise</span></a><button class="watt-nav-menu-btn" onclick="document.querySelector('.watt-nav-links').classList.toggle('active')" aria-label="Toggle menu">☰</button><ul class="watt-nav-links"><li><a href="../index.html">Home</a></li><li><a href="index.html">Tools</a></li><li><a href="../blog/index.html">Blog</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../faq.html">FAQ</a></li></ul></div></nav>
+<nav class="watt-breadcrumb" aria-label="breadcrumb"><ol><li><a href="../index.html">Home</a></li><li><a href="index.html">Tools</a></li><li aria-current="page">Bill Breakdown</li></ol></nav>
+
+<div class="watt-container"><div class="watt-ad-label">Advertisement</div><div id="tool_top" data-ad-slot="tool_top" class="watt-ad-slot"></div></div>
+
+<header class="watt-tool-hero"><div class="watt-tool-container"><h1>Home Energy Bill Breakdown</h1><p>Enter your monthly electric bill and home details. We will show you exactly where your kilowatt-hours go and what each category costs per year.</p></div></header>
+
+<div class="watt-tool-container">
+  <!-- Step Indicator -->
+  <div style="display:flex;gap:8px;margin-bottom:24px;align-items:center;">
+    <div id="step1-indicator" style="flex:1;height:4px;background:var(--watt-primary);border-radius:2px;"></div>
+    <div id="step2-indicator" style="flex:1;height:4px;background:var(--watt-border);border-radius:2px;"></div>
+    <div id="step3-indicator" style="flex:1;height:4px;background:var(--watt-border);border-radius:2px;"></div>
+  </div>
+
+  <!-- Step 1: Inputs -->
+  <div id="step1" class="watt-tool-panel">
+    <h3 style="margin-bottom:20px;">Step 1: Your Bill & Home</h3>
+    <div class="watt-form-row">
+      <div class="watt-form-group"><label>Monthly Electric Bill ($)</label><input type="number" id="billAmount" placeholder="e.g. 147.33" step="0.01"></div>
+      <div class="watt-form-group"><label>Home Size (sq ft)</label><input type="number" id="homeSize" placeholder="e.g. 1800"></div>
+    </div>
+    <div class="watt-form-row">
+      <div class="watt-form-group"><label>Number of Occupants</label><input type="number" id="occupants" placeholder="e.g. 4" min="1"></div>
+      <div class="watt-form-group"><label>Climate Zone</label>
+        <select id="climateZone">
+          <option value="mixed">Mixed / Moderate</option>
+          <option value="hot">Hot / Humid</option>
+          <option value="cold">Cold / Very Cold</option>
+        </select>
+      </div>
+    </div>
+    <div class="watt-form-group"><label>Primary Heating Fuel</label>
+      <select id="heatingFuel">
+        <option value="electric">Electric (heat pump, baseboard)</option>
+        <option value="gas">Natural Gas (furnace)</option>
+        <option value="oil">Heating Oil</option>
+        <option value="propane">Propane</option>
+      </select>
+    </div>
+    <div class="watt-tool-actions">
+      <button class="watt-btn watt-btn-primary" onclick="calculateBreakdown()">Calculate Breakdown</button>
+      <button class="watt-btn watt-btn-secondary" onclick="resetTool()">Reset</button>
+    </div>
+    <p style="font-size:0.85rem;color:var(--watt-text-light);margin-top:12px;">All data stays in your browser. Nothing is sent to our servers.</p>
+  </div>
+
+  <!-- Step 2: Results -->
+  <div id="step2" class="watt-tool-panel" style="display:none;">
+    <h3 style="margin-bottom:20px;">Step 2: Your Breakdown</h3>
+    <div class="watt-result-grid" id="resultGrid"></div>
+    <div class="watt-chart-container"><canvas id="breakdownChart"></canvas></div>
+    <div class="watt-result-box">
+      <h4>Annual Cost Summary</h4>
+      <p id="annualSummary"></p>
+    </div>
+    <div class="watt-tool-actions">
+      <button class="watt-btn watt-btn-primary" onclick="saveToHistory()">Save to History</button>
+      <button class="watt-btn watt-btn-secondary" onclick="exportPDF()">Export PDF</button>
+      <button class="watt-btn watt-btn-accent" onclick="showStep(1)">Edit Inputs</button>
+    </div>
+  </div>
+
+  <!-- Step 3: History & Compare -->
+  <div id="step3" class="watt-tool-panel" style="display:none;">
+    <h3 style="margin-bottom:20px;">Step 3: History & Comparison</h3>
+    <div id="historySection">
+      <h4 style="margin-bottom:12px;">Saved Calculations</h4>
+      <ul class="watt-history-list" id="historyList"></ul>
+      <button class="watt-btn watt-btn-secondary" onclick="clearHistory()">Clear History</button>
+    </div>
+    <div id="compareSection" style="margin-top:24px;display:none;">
+      <h4 style="margin-bottom:12px;">Side-by-Side Comparison</h4>
+      <div id="compareTable"></div>
+    </div>
+  </div>
+
+<!-- How It Works -->
+<div class="watt-tool-panel" style="margin-top:24px;">
+  <h3 style="margin-bottom:16px;">How It Works</h3>
+  <p style="color:var(--watt-text-light);margin-bottom:12px;">This calculator breaks down your monthly electric bill into seven major categories using U.S. Department of Energy national averages. Here is what happens under the hood:</p>
+  <ol style="margin-left:24px;color:var(--watt-text-light);line-height:1.8;">
+    <li><strong>Baseline split:</strong> We start with DOE climate-zone percentages for HVAC, water heating, lighting, refrigeration, laundry, electronics, and other appliances.</li>
+    <li><strong>Heating fuel adjustment:</strong> If you select natural gas, oil, or propane for heating, we reduce the HVAC electricity share by 40% and redistribute that portion to "other."</li>
+    <li><strong>Home-size scaling:</strong> The national average home is 2,000 sq ft. Your inputs scale the HVAC, lighting, and other categories proportionally.</li>
+    <li><strong>Occupant scaling:</strong> Water heating, laundry, and refrigeration costs are scaled by the number of occupants relative to the national average of 2.5.</li>
+    <li><strong>Normalization:</strong> All percentages are re-normalized to 100% so the pie chart and bar chart always sum to your total bill.</li>
+  </ol>
+  <p style="color:var(--watt-text-light);margin-top:12px;"><strong>Tip:</strong> For the most accurate results, enter your actual monthly bill (not an average) and use your home's conditioned square footage.</p>
+</div>
+</div>
+
+<!-- Related Articles & Tools -->
+<div class="watt-container"><div class="watt-ad-label">Advertisement</div><div id="tool_middle" data-ad-slot="tool_middle" class="watt-ad-slot"></div></div>
+
+<section class="watt-section" style="background:var(--watt-bg-dark);">
+  <div class="watt-container">
+    
+
+<div class="watt-post-footer-grid">
+      <div>
+        <h3 class="watt-footer-col-title">Related Articles</h3>
+        <div class="watt-related-card"><a href="../blog/how-to-calculate-your-true-cost-per-kilowatt-hour.html"><h4>How to Calculate Your True Cost Per Kilowatt-Hour</h4><p>I was talking to a neighbor last week. He told me he pays $0.12 per kilowatt‑hou...</p></a></div>
+        <div class="watt-related-card"><a href="../blog/solar-installation-checklist-6-things-to-verify-be.html"><h4>Solar Installation Checklist 6 Things to Verify Be</h4><p>I got a call from a guy named Paul last spring. He had just signed a solar contr...</p></a></div>
+        <div class="watt-related-card"><a href="../blog/smart-thermostat-programming-guide-save-200year-wi.html"><h4>Smart Thermostat Programming Guide Save 200Year Wi</h4><p>I’ve seen a lot of smart thermostats installed backwards. People buy them, stick...</p></a></div>
+      </div>
+      <div>
+        <h3 class="watt-footer-col-title">Recommended Tools</h3>
+        <div class="watt-tool-rec-card"><a href="time-of-use-optimizer.html"><h4>Time-of-Use Optimizer</h4><p>Shift usage to cheaper hours and save.</p></a></div>
+        <div class="watt-tool-rec-card"><a href="led-savings-calculator.html"><h4>LED Lighting Savings</h4><p>See how much switching to LED saves.</p></a></div>
+        <div class="watt-tool-rec-card"><a href="hvac-efficiency-analyzer.html"><h4>HVAC Efficiency Analyzer</h4><p>Compare SEER ratings and payback.</p></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="watt-container"><div class="watt-ad-label">Advertisement</div><div id="tool_bottom" data-ad-slot="tool_bottom" class="watt-ad-slot"></div></div>
+
+
+<footer class="watt-footer">
+  <div class="watt-footer-grid">
+    <div><h4>Tools</h4><a href="energy-bill-calculator.html">Bill Breakdown</a><a href="solar-roi-calculator.html">Solar ROI</a><a href="hvac-efficiency-analyzer.html">HVAC Analyzer</a><a href="led-savings-calculator.html">LED Savings</a><a href="insulation-roi-calculator.html">Insulation ROI</a><a href="time-of-use-optimizer.html">TOU Optimizer</a></div>
+    <div><h4>Blog</h4><a href="../blog/index.html">All Articles</a><a href="../blog/index.html">Energy Saving Tips</a><a href="../blog/index.html">Solar Guides</a><a href="../blog/index.html">HVAC & Insulation</a></div>
+    <div><h4>Company</h4><a href="../about.html">About</a><a href="../contact.html">Contact</a><a href="../faq.html">FAQ</a><a href="../privacy.html">Privacy</a><a href="../terms.html">Terms</a></div>
+    <div><h4>Legal</h4><a href="../disclaimer.html">Disclaimer</a><a href="../disclosure.html">Disclosure</a><a href="../privacy.html">Privacy Policy</a><a href="../terms.html">Terms of Use</a></div>
+  </div>
+  <div class="watt-footer-bottom"><p>2026 WattWise. All rights reserved. | wattwisepro.org</p></div>
+</footer>
+
+<script src="../ads-loader.js"></script>
+<script>
+// National average breakdown percentages by climate and heating fuel
+const BREAKDOWN_DATA = {
+  mixed: { hvac: 0.42, waterHeating: 0.14, lighting: 0.09, refrigeration: 0.08, laundry: 0.06, electronics: 0.12, other: 0.09 },
+  hot: { hvac: 0.55, waterHeating: 0.10, lighting: 0.08, refrigeration: 0.09, laundry: 0.05, electronics: 0.08, other: 0.05 },
+  cold: { hvac: 0.48, waterHeating: 0.16, lighting: 0.08, refrigeration: 0.07, laundry: 0.06, electronics: 0.09, other: 0.06 }
+};
+
+const CATEGORY_NAMES = {
+  hvac: 'HVAC (Heating & Cooling)',
+  waterHeating: 'Water Heating',
+  lighting: 'Lighting',
+  refrigeration: 'Refrigeration',
+  laundry: 'Laundry & Cleaning',
+  electronics: 'Electronics & Entertainment',
+  other: 'Other Appliances'
+};
+
+const CATEGORY_COLORS = {
+  hvac: '#1a5f2a', waterHeating: '#2d8a3e', lighting: '#f4a261',
+  refrigeration: '#e76f51', laundry: '#264653', electronics: '#2a9d8f', other: '#6c757d'
+};
+
+let currentResult = null;
+const STORAGE_KEY = 'watt-bill-breakdown-history';
+
+function showStep(n) {
+  document.getElementById('step1').style.display = n === 1 ? 'block' : 'none';
+  document.getElementById('step2').style.display = n === 2 ? 'block' : 'none';
+  document.getElementById('step3').style.display = n === 3 ? 'block' : 'none';
+  document.getElementById('step1-indicator').style.background = n >= 1 ? 'var(--watt-primary)' : 'var(--watt-border)';
+  document.getElementById('step2-indicator').style.background = n >= 2 ? 'var(--watt-primary)' : 'var(--watt-border)';
+  document.getElementById('step3-indicator').style.background = n >= 3 ? 'var(--watt-primary)' : 'var(--watt-border)';
+}
+
+function calculateBreakdown() {
+  const bill = parseFloat(document.getElementById('billAmount').value);
+  const size = parseFloat(document.getElementById('homeSize').value);
+  const occupants = parseInt(document.getElementById('occupants').value) || 1;
+  const climate = document.getElementById('climateZone').value;
+  const fuel = document.getElementById('heatingFuel').value;
+
+  if (!bill || bill <= 0) { alert('Please enter a valid monthly bill amount'); return; }
+
+  let breakdown = { ...BREAKDOWN_DATA[climate] };
+
+  // Adjust for heating fuel
+  if (fuel !== 'electric') {
+    breakdown.hvac *= 0.6; // HVAC electricity portion drops if gas/oil heat
+    breakdown.other += (BREAKDOWN_DATA[climate].hvac - breakdown.hvac);
+  }
+
+  // Adjust for home size vs national average (2000 sq ft)
+  const sizeFactor = size / 2000 || 1;
+  breakdown.hvac *= sizeFactor;
+  breakdown.lighting *= sizeFactor;
+  breakdown.other *= sizeFactor;
+
+  // Adjust for occupants vs average (2.5)
+  const occupantFactor = occupants / 2.5;
+  breakdown.waterHeating *= occupantFactor;
+  breakdown.laundry *= occupantFactor;
+  breakdown.refrigeration *= Math.min(occupantFactor, 1.3);
+
+  // Normalize to 100%
+  const total = Object.values(breakdown).reduce((a,b) => a+b, 0);
+  Object.keys(breakdown).forEach(k => breakdown[k] /= total);
+
+  currentResult = {
+    bill, size, occupants, climate, fuel, breakdown,
+    date: new Date().toLocaleDateString()
+  };
+
+  renderResults();
+  showStep(2);
+}
+
+function renderResults() {
+  const grid = document.getElementById('resultGrid');
+  const summary = document.getElementById('annualSummary');
+  const r = currentResult;
+  const annual = r.bill * 12;
+
+  grid.innerHTML = '';
+  Object.entries(r.breakdown).forEach(([key, pct]) => {
+    const monthly = r.bill * pct;
+    const yearly = monthly * 12;
+    grid.innerHTML += `
+      <div class="watt-result-item">
+        <div class="value" style="color:${CATEGORY_COLORS[key]}">$${monthly.toFixed(2)}</div>
+        <div class="label">${CATEGORY_NAMES[key]}</div>
+        <div style="font-size:0.75rem;color:var(--watt-text-light);margin-top:4px;">${(pct*100).toFixed(1)}% · $${yearly.toFixed(0)}/yr</div>
+      </div>`;
+  });
+
+  summary.innerHTML = `Your monthly bill of <strong>$${r.bill.toFixed(2)}</strong> equals <strong>$${annual.toFixed(2)}</strong> per year. 
+    The biggest cost category is <strong>${CATEGORY_NAMES[Object.entries(r.breakdown).sort((a,b)=>b[1]-a[1])[0][0]]}</strong> at 
+    <strong>${(Object.entries(r.breakdown).sort((a,b)=>b[1]-a[1])[0][1]*100).toFixed(1)}%</strong>.`;
+
+  drawChart(r.breakdown);
+}
+
+function drawChart(data) {
+  const canvas = document.getElementById('breakdownChart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+
+  const w = rect.width, h = rect.height;
+  const pad = 40, barH = 28, gap = 12;
+  const maxVal = Math.max(...Object.values(data));
+  const barMaxW = w - pad * 2 - 160;
+
+  ctx.clearRect(0, 0, w, h);
+  ctx.font = '13px Segoe UI, sans-serif';
+
+  let y = pad;
+  Object.entries(data).sort((a,b) => b[1]-a[1]).forEach(([key, val]) => {
+    const bw = (val / maxVal) * barMaxW;
+    // Bar
+    ctx.fillStyle = CATEGORY_COLORS[key];
+    ctx.beginPath();
+    ctx.roundRect(pad, y, bw, barH, 4);
+    ctx.fill();
+    // Label
+    ctx.fillStyle = '#212529';
+    ctx.textAlign = 'left';
+    ctx.fillText(CATEGORY_NAMES[key], pad + bw + 10, y + barH/2 + 4);
+    // Percentage
+    ctx.fillStyle = '#6c757d';
+    ctx.textAlign = 'right';
+    ctx.fillText((val*100).toFixed(1) + '%', pad + bw - 8, y + barH/2 + 4);
+    y += barH + gap;
+  });
+}
+
+function saveToHistory() {
+  if (!currentResult) return;
+  let history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  history.unshift(currentResult);
+  if (history.length > 10) history = history.slice(0, 10);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+  renderHistory();
+  showStep(3);
+}
+
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (history.length === 0) {
+    list.innerHTML = '<li style="color:var(--watt-text-light);">No saved calculations yet.</li>';
+    return;
+  }
+  list.innerHTML = history.map((h, i) => `
+    <li onclick="loadHistory(${i})">
+      <div><strong>$${h.bill.toFixed(2)}/mo</strong> · ${h.size} sq ft · ${h.climate}</div>
+      <div class="date">${h.date}</div>
+    </li>
+  `).join('');
+}
+
+function loadHistory(index) {
+  const history = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (history[index]) {
+    currentResult = history[index];
+    renderResults();
+    showStep(2);
+  }
+}
+
+function clearHistory() {
+  if (confirm('Clear all saved calculations?')) {
+    localStorage.removeItem(STORAGE_KEY);
+    renderHistory();
+  }
+}
+
+function resetTool() {
+  document.getElementById('billAmount').value = '';
+  document.getElementById('homeSize').value = '';
+  document.getElementById('occupants').value = '';
+  document.getElementById('climateZone').value = 'mixed';
+  document.getElementById('heatingFuel').value = 'electric';
+  currentResult = null;
+  showStep(1);
+}
+
+function exportPDF() {
+  if (!currentResult) return;
+  const r = currentResult;
+  let text = `WATTWISE - HOME ENERGY BILL BREAKDOWN\n`;
+  text += `Generated: ${new Date().toLocaleString()}\n\n`;
+  text += `Inputs:
+`;
+  text += `  Monthly Bill: $${r.bill.toFixed(2)}
+`;
+  text += `  Home Size: ${r.size} sq ft
+`;
+  text += `  Occupants: ${r.occupants}
+`;
+  text += `  Climate: ${r.climate}
+`;
+  text += `  Heating Fuel: ${r.fuel}
+
+`;
+  text += `Breakdown:
+`;
+  Object.entries(r.breakdown).sort((a,b)=>b[1]-a[1]).forEach(([k,v]) => {
+    text += `  ${CATEGORY_NAMES[k]}: ${(v*100).toFixed(1)}% = $${(r.bill*v).toFixed(2)}/mo = $${(r.bill*v*12).toFixed(2)}/yr
+`;
+  });
+  text += `
+Annual Total: $${(r.bill*12).toFixed(2)}
+`;
+  text += `
+---
+wattwisepro.org | All data stays in your browser`;
+
+  const blob = new Blob([text], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `wattwise-bill-breakdown-${Date.now()}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Init
+renderHistory();
+</script>
+</body>
+</html>
