@@ -1,0 +1,31 @@
+{
+  "site_name": "WattWise",
+  "domain": "wattwisepro.org",
+  "prefix": "watt",
+  "language": "en",
+  "author": "James Patterson",
+  "author_location": "Denver, Colorado",
+  "theme": "energy_efficiency",
+  "category": "home_energy",
+  "layouts": {
+    "home": "B",
+    "tools_index": "G",
+    "blog_index": "B",
+    "post": "C",
+    "tool_detail": "D",
+    "about": "B",
+    "contact": "B",
+    "faq": "C"
+  },
+  "tools": [
+    {"id": "energy-bill-calculator", "name": "Home Energy Bill Breakdown", "slug": "home-energy-bill-breakdown"},
+    {"id": "solar-roi-calculator", "name": "Solar Panel ROI Calculator", "slug": "solar-panel-roi-calculator"},
+    {"id": "hvac-efficiency-analyzer", "name": "HVAC Efficiency Upgrade Analyzer", "slug": "hvac-efficiency-upgrade-analyzer"},
+    {"id": "led-savings-calculator", "name": "LED Lighting Upgrade Savings", "slug": "led-lighting-upgrade-savings"},
+    {"id": "insulation-roi-calculator", "name": "Insulation ROI Calculator", "slug": "insulation-roi-calculator"},
+    {"id": "time-of-use-optimizer", "name": "Time-of-Use Rate Optimizer", "slug": "time-of-use-rate-optimizer"}
+  ],
+  "ads_enabled": true,
+  "ad_height": 250,
+  "created": "2026-06-14"
+}
