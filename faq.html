@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ | WattWise</title>
+<meta name="description" content="Frequently asked questions about WattWise tools, energy savings, and home efficiency.">
+<link rel="canonical" href="https://wattwisepro.org/faq.html">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta property="og:title" content="FAQ | WattWise">
+<meta property="og:description" content="Frequently asked questions about WattWise tools, energy savings, and home efficiency.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://wattwisepro.org/faq.html">
+<meta property="og:image" content="https://wattwisepro.org/images/og-default.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://wattwisepro.org/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://wattwisepro.org/faq.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are WattWise calculators free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes, all calculators and tools on WattWise are completely free. No signup, no email required. Your data stays in your browser."}},{"@type":"Question","name":"Is my data saved on your servers?","acceptedAnswer":{"@type":"Answer","text":"No. All calculations happen in your browser. Any data you enter is stored locally on your device using localStorage. We never see it."}},{"@type":"Question","name":"How accurate are the savings estimates?","acceptedAnswer":{"@type":"Answer","text":"Our estimates are based on national averages and generalized assumptions. Actual savings depend on your specific home, climate, utility rates, and usage patterns. Use our numbers as a starting point, then consult a professional for precise calculations."}},{"@type":"Question","name":"Can I export my calculation results?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every tool includes an export function that generates a PDF report of your inputs and results. You can also save calculations to your browser's local history for comparison."}},{"@type":"Question","name":"Do you offer professional energy audits?","acceptedAnswer":{"@type":"Answer","text":"No. WattWise is an educational resource only. We do not offer professional services or consultations. For a real energy audit, hire a certified auditor in your area."}},{"@type":"Question","name":"How do I clear my saved calculations?","acceptedAnswer":{"@type":"Answer","text":"Each tool has a Reset button that clears the current inputs. To clear all saved history, use the Clear History button in the tool's history panel, or clear your browser's localStorage data."}}]}</script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="watt-nav"><div class="watt-nav-container"><a href="index.html" class="watt-nav-logo">Watt<span>Wise</span></a><button class="watt-nav-menu-btn" onclick="document.querySelector('.watt-nav-links').classList.toggle('active')" aria-label="Toggle menu">☰</button><ul class="watt-nav-links"><li><a href="index.html">Home</a></li><li><a href="tools/index.html">Tools</a></li><li><a href="blog/index.html">Blog</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="faq.html">FAQ</a></li></ul></div></nav>
+<nav class="watt-breadcrumb" aria-label="breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">FAQ</li></ol></nav>
+
+<main class="watt-section">
+  <div class="watt-container" style="max-width:800px;">
+    <h1 style="font-size:2rem;margin-bottom:12px;text-align:center;">Frequently Asked Questions</h1>
+    <p style="color:var(--watt-text-light);margin-bottom:32px;text-align:center;">Quick answers to common questions about WattWise</p>
+
+    <!-- Search Box -->
+    <div style="margin-bottom:40px;">
+      <input type="text" id="faq-search" placeholder="Search questions..." style="width:100%;padding:14px 18px;border:2px solid var(--watt-border);border-radius:var(--watt-radius);font-size:1rem;font-family:inherit;" onkeyup="filterFAQ()">
+    </div>
+
+    <div id="faq-list">
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Are WattWise calculators free to use?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">Yes, all calculators and tools on WattWise are completely free. No signup, no email required. Your data stays in your browser.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Is my data saved on your servers?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">No. All calculations happen in your browser. Any data you enter is stored locally on your device using localStorage. We never see it.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">How accurate are the savings estimates?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">Our estimates are based on national averages and generalized assumptions. Actual savings depend on your specific home, climate, utility rates, and usage patterns. Use our numbers as a starting point, then consult a professional for precise calculations.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Can I export my calculation results?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">Yes. Every tool includes an export function that generates a PDF report of your inputs and results. You can also save calculations to your browser's local history for comparison.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Do you offer professional energy audits?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">No. WattWise is an educational resource only. We do not offer professional services or consultations. For a real energy audit, hire a certified auditor in your area.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">How do I clear my saved calculations?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">Each tool has a Reset button that clears the current inputs. To clear all saved history, use the Clear History button in the tool's history panel, or clear your browser's localStorage data.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Why do you show ads?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">Advertising helps us keep WattWise free. We use Google AdSense and participate in affiliate programs for energy-related products. We do not sell your data to advertisers.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Can I share my calculation results?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">Yes. After calculating, click the Share button to copy a summary to your clipboard, or download the PDF report to email or print.</p>
+      </div>
+    </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">What data does WattWise collect?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">None. We do not use cookies, trackers, or analytics. Every calculation runs entirely in your browser using JavaScript. We have no server-side processing for the tools.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Can I use these tools for commercial properties?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">The calculators are designed for residential homes. Commercial buildings have different load profiles, rate structures, and equipment. For commercial audits, hire a professional.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">How often are the calculators updated?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">We update tax credit rates, utility rate assumptions, and national averages at least once per quarter. The underlying physics and engineering formulas remain constant.</p>
+      </div>
+      <div class="faq-item" style="background:var(--watt-white);border-radius:var(--watt-radius);padding:24px;margin-bottom:16px;box-shadow:var(--watt-shadow);">
+        <h3 style="font-size:1.1rem;margin-bottom:10px;color:var(--watt-primary-dark);">Who writes the articles on WattWise?</h3>
+        <p style="color:var(--watt-text-light);margin:0;">All articles are written by James Patterson, a certified home energy auditor with 25 years of experience in the utility industry. Stories are based on real audits with names changed for privacy.</p>
+      </div>
+  </div>
+</main>
+
+<script>
+function filterFAQ() {
+  const query = document.getElementById('faq-search').value.toLowerCase();
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(query) ? 'block' : 'none';
+  });
+}
+</script>
+
+<footer class="watt-footer"><div class="watt-footer-grid"><div><h4>Tools</h4><a href="tools/energy-bill-calculator.html">Bill Breakdown</a><a href="tools/solar-roi-calculator.html">Solar ROI</a><a href="tools/hvac-efficiency-analyzer.html">HVAC Analyzer</a><a href="tools/led-savings-calculator.html">LED Savings</a><a href="tools/insulation-roi-calculator.html">Insulation ROI</a><a href="tools/time-of-use-optimizer.html">TOU Optimizer</a></div><div><h4>Blog</h4><a href="blog/index.html">All Articles</a><a href="blog/index.html">Energy Saving Tips</a><a href="blog/index.html">Solar Guides</a><a href="blog/index.html">HVAC & Insulation</a></div><div><h4>Company</h4><a href="about.html">About</a><a href="contact.html">Contact</a><a href="faq.html">FAQ</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div><div><h4>Legal</h4><a href="disclaimer.html">Disclaimer</a><a href="disclosure.html">Disclosure</a><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Use</a></div></div><div class="watt-footer-bottom"><p>© 2026 WattWise. All rights reserved. | wattwisepro.org</p></div></footer>
+</body></html>
